@@ -392,6 +392,11 @@ h3 {
     color: var(--color-tertiary);
     margin-bottom: calc(var(--spacing-unit) * 2);
 }
+.certificate-duracao {
+    font-size: 13px;
+    color: var(--color-tertiary);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
 
 .certificate-description {
     font-size: 14px;
@@ -707,3 +712,4 @@ footer {
         padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 3);
     }
 }
+
