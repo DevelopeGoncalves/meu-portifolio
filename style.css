@@ -623,8 +623,8 @@ h3 {
     border-color: var(--color-accent);
     transform: translateY(-2px);
 }
-.btn-instagram { background: #f77e18; }
-.btn-github { background: #334155; }
+.btn-instagram { background: #0a66c2; }
+.btn-github { background: #0a66c2; }
 .btn-linkedin { background: #0a66c2; }
 
 /* Footer */
@@ -712,4 +712,5 @@ footer {
         padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 3);
     }
 }
+
 
