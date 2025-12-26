@@ -185,7 +185,7 @@
             background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 20px; overflow: hidden; transition: 0.4s ease;
             display: flex; flex-direction: column; position: relative;
-            height: 100%;
+            height: 100%; cursor: pointer; /* Indica que é clicável */
         }
 
         .card:hover {
@@ -215,7 +215,7 @@
             display: flex; align-items: center; justify-content: center; width: 100%;
             padding: 0.8rem; background: rgba(255,255,255,0.03); color: white;
             text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 0.9rem;
-            transition: 0.3s; border: 1px solid var(--border); margin-top: auto;
+            transition: 0.3s; border: 1px solid var(--border); margin-top: auto; cursor: pointer;
         }
         .btn-live:hover { background: var(--primary); border-color: var(--primary); }
 
@@ -281,6 +281,67 @@
         .social-links a { color: #666; font-size: 1.5rem; transition: 0.3s; }
         .social-links a:hover { color: var(--primary); }
 
+        /* --- MODAL DE PROJETOS (NOVO) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px);
+            z-index: 2000; /* Acima do header */
+            display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active { display: flex; opacity: 1; }
+
+        .modal-content {
+            background: #121212; width: 90%; max-width: 1000px;
+            border-radius: 20px; border: 1px solid var(--border);
+            position: relative; overflow: hidden;
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.2);
+            transform: scale(0.9); transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .close-modal {
+            position: absolute; top: 15px; right: 20px;
+            background: none; border: none; color: white;
+            font-size: 2rem; cursor: pointer; z-index: 10; text-shadow: 0 0 10px black;
+        }
+
+        .modal-body {
+            display: grid; grid-template-columns: 1.5fr 1fr;
+        }
+
+        .modal-video-container {
+            background: black; position: relative; padding-bottom: 56.25%; /* Aspect Ratio 16:9 */
+            height: 0; border-right: 1px solid var(--border);
+        }
+
+        .modal-video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .modal-info { padding: 2rem; display: flex; flex-direction: column; }
+        .modal-info h2 { font-size: 2rem; color: white; margin-bottom: 1rem; line-height: 1.2; }
+        .modal-info p { color: #ccc; line-height: 1.6; font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .modal-tags { margin-bottom: 1rem; }
+        .modal-tags span {
+            display: inline-block; background: rgba(139, 92, 246, 0.15);
+            color: var(--primary); padding: 5px 12px; border-radius: 15px;
+            font-size: 0.8rem; margin-right: 5px; margin-bottom: 10px; border: 1px solid var(--primary);
+        }
+
+        /* Responsividade do Modal */
+        @media (max-width: 900px) {
+            .modal-body { grid-template-columns: 1fr; }
+            .modal-video-container { border-right: none; border-bottom: 1px solid var(--border); }
+            .modal-info { padding: 1.5rem; }
+            .modal-content { height: 90vh; overflow-y: auto; display: flex; flex-direction: column; }
+            .modal-body { display: block; }
+            .modal-video-container { flex-shrink: 0; }
+        }
+
     </style>
 </head>
 <body>
@@ -336,37 +397,38 @@
         <h2>Alimentação & Delivery</h2>
     </div>
     <div class="projects-grid reveal">
-        <div class="card">
+        <div class="card" onclick="openProject('cardapio')">
             <div class="card-preview" style="background-image: url('img/cardapio.webp');">
                 <span class="card-tag">SaaS</span>
             </div>
             <div class="card-content">
                 <h3>SaaS Cardápio Digital</h3>
                 <p>Plataforma completa para delivery via WhatsApp. O cliente monta o pedido e você recebe pronto, sem comissões.</p>
-                <a href="https://developegoncalves.github.io/cardapio-digital/" target="_blank" class="btn-live">Acessar Demo <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
         
-        <div class="card">
-            <div class="card-preview" style="background-image: url('img/acai.webp');"> <span class="card-tag">Web App</span>
+        <div class="card" onclick="openProject('acai')">
+            <div class="card-preview" style="background-image: url('img/acai.webp');"> 
+                <span class="card-tag">Web App</span>
             </div>
             <div class="card-content">
                 <h3>Açaí Victorino</h3>
                 <p>Sistema interativo "Monte seu Açaí". Seleção de tamanhos, coberturas e cálculo automático do pedido.</p>
-                <a href="https://developegoncalves.github.io/acai-teste/" target="_blank" class="btn-live">Acessar Demo <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
-        <div class="card">
+        
+        <div class="card" onclick="openProject('enseada')">
             <div class="card-preview" style="background-image: url('img/enseada.webp');">
                 <span class="card-tag">Site</span>
             </div>
             <div class="card-content">
                 <h3>Restaurante Enseada</h3>
                 <p>Site institucional elegante focado em branding e apresentação do ambiente e cardápio.</p>
-                <a href="https://developegoncalves.github.io/enseada-mineira/" target="_blank" class="btn-live">Ver Site <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
-
     </div>
 
     <div class="category-header reveal" id="services">
@@ -374,47 +436,47 @@
         <h2>Serviços & Institucional</h2>
     </div>
     <div class="projects-grid reveal">
-        <div class="card">
+        <div class="card" onclick="openProject('barbearia')">
              <div class="card-preview" style="background-image: url('img/barbearia.webp');">
                 <span class="card-tag">Agendamento</span>
             </div>
             <div class="card-content">
                 <h3>Barbearia Victorino</h3>
                 <p>Sistema de agendamento online. Reduz faltas (no-show) e organiza a agenda dos profissionais.</p>
-                <a href="https://developegoncalves.github.io/barbearia-pimenta/" target="_blank" class="btn-live">Ver Sistema <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
-        <div class="card">
+
+        <div class="card" onclick="openProject('fisio')">
             <div class="card-preview" style="background-image: url('img/fisio.webp');">
                 <span class="card-tag">Landing Page</span>
             </div>
             <div class="card-content">
                 <h3>Thiago Oliveira Fisio</h3>
                 <p>Página de alta conversão (LP) otimizada para captar pacientes via Google Ads e Instagram.</p>
-                <a href="https://developegoncalves.github.io/Thiago-Oliveira---Fisioterapeuta/" target="_blank" class="btn-live">Ver Página <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
-        <div class="card">
+
+        <div class="card" onclick="openProject('portal')">
             <div class="card-preview" style="background-image: url('img/portal.webp');">
                 <span class="card-tag">Portal</span>
             </div>
             <div class="card-content">
                 <h3>Portal IBNVJC</h3>
                 <p>Portal completo com gestão de eventos, notícias e área de membros para organizações.</p>
-                <a href="https://www.ibnvjc.com.br/" target="_blank" class="btn-live">Ver Portal <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openProject('mecanica')">
             <div class="card-preview" style="background-image: url('img/hc-mecanica.webp');">
                 <span class="card-tag">Serviços</span>
             </div>
             <div class="card-content">
                 <h3>HC Mecânica</h3>
                 <p>Site institucional para oficina automotiva com descrição de serviços.</p>
-                <a href="https://developegoncalves.github.io/HC-mecanica/" target="_blank" class="btn-live">
-                    Ver Site <i class="fas fa-external-link-alt" style="margin-left:5px;"></i>
-                </a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
     </div>
@@ -424,82 +486,75 @@
         <h2>Varejo & PDV</h2>
     </div>
     <div class="projects-grid reveal">
-        <div class="card" style="border-color: var(--secondary);">
+        <div class="card" onclick="openProject('pdv_premium')" style="border-color: var(--secondary);">
             <div class="card-preview" style="background-image: url('img/pdv.webp');">
                 <span class="card-tag" style="background:var(--secondary);">Premium</span>
             </div>
             <div class="card-content">
                 <h3 style="color:var(--secondary);">Sistema PDV + Carpadio Completo</h3>
-                <p>Não perca dinheiro na cozinha. O nosso sistema integra Ficha Técnica e Controlo de Custos ao PDV e Cardápio Digital. Saiba exatamente quanto lucra em cada prato.</p>
-                <a href="https://developegoncalves.github.io/thiago-santa-teresa/" target="_blank" class="btn-live" style="background:rgba(6,182,212,0.1); border-color:var(--secondary); color:var(--secondary);">Acessar Admin <i class="fas fa-external-link-alt"></i></a>
+                <p>Não perca dinheiro na cozinha. O nosso sistema integra Ficha Técnica e Controlo de Custos ao PDV e Cardápio Digital.</p>
+                <button class="btn-live" style="background:rgba(6,182,212,0.1); border-color:var(--secondary); color:var(--secondary);">
+                    Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i>
+                </button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openProject('pdv_doces')">
             <div class="card-preview" style="background-image: url('img/wagner-doces.webp');">
                 <span class="card-tag">Vitrine</span>
             </div>
             <div class="card-content">
                 <h3>PDV Doces</h3>
                 <p>Apresentação visual de produtos e doces artesanais.</p>
-                <a href="https://developegoncalves.github.io/Wagner-doces/" target="_blank" class="btn-live">
-                    Acessar <i class="fas fa-external-link-alt" style="margin-left:5px;"></i>
-                </a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>  
 
-        <div class="card">
+        <div class="card" onclick="openProject('obras')">
             <div class="card-preview" style="background-image: url('img/gestao-de-obras.webp');">
                 <span class="card-tag">Vitrine</span>
             </div>
             <div class="card-content">
                 <h3>Gestão de Obras</h3>
-                <p>Não perca dinheiro no canteiro de obras. O nosso sistema integra Controle Financeiro, Boletos e Estoque em um único Dashboard. Saiba exatamente o custo real do seu projeto e evite multas por atraso.</p>
-                <a href="https://developegoncalves.github.io/Gestao-obras-Demo/" target="_blank" class="btn-live">
-                    Acessar <i class="fas fa-external-link-alt" style="margin-left:5px;"></i>
-                </a>
+                <p>Não perca dinheiro no canteiro de obras. O nosso sistema integra Controle Financeiro, Boletos e Estoque em um único Dashboard.</p>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div> 
-
     </div>
 
-    <div class="category-header reveal" id="retail">
+    <div class="category-header reveal" id="ecommerce">
         <i class="fas fa-shopping-cart"></i>
         <h2>Loja Virtual</h2>
     </div>
     <div class="projects-grid reveal">
-        <div class="card">
+        <div class="card" onclick="openProject('loja_roupas')">
             <div class="card-preview" style="background-image: url('img/elinho-loja.webp');">
                 <span class="card-tag">E-commerce</span>
             </div>
             <div class="card-content">
                 <h3>Loja de Roupas</h3>
                 <p>Loja virtual moderna para varejo com catálogo de produtos.</p>
-                <a href="https://developegoncalves.github.io/elinho-loja/" target="_blank" class="btn-live">
-                    Ver Loja <i class="fas fa-external-link-alt" style="margin-left:5px;"></i>
-                </a>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openProject('relogios')">
             <div class="card-preview" style="background-image: url('img/relogios.webp');"></div>
             <div class="card-content">
                 <h3>Gutyerre Relógios</h3>
-                <p>Transforme sua relojoaria em um negócio digital hoje mesmo! ⌚ Site completo, elegante e pronto para usar à venda.</p>
-                <a href="https://developegoncalves.github.io/gutyerre-relogios/" target="_blank" class="btn-live">Ver Loja <i class="fas fa-external-link-alt" style="margin-left:5px;"></i></a>
+                <p>Transforme sua relojoaria em um negócio digital hoje mesmo! ⌚ Site completo, elegante e pronto para usar.</p>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="openProject('loja_whats')">
             <div class="card-preview" style="background-image: url('img/divina-sensacao.webp');">
                 <span class="card-tag">Loja Virtual</span>
             </div>
             <div class="card-content">
                 <h3>Loja Virtual Integrada ao WhatsApp</h3>
-                <p>Roupas, eletrónicos, comida ou cosméticos? Não importa o seu produto, nós temos a vitrine perfeita. Transforme o seu negócio numa loja virtual completa com carrinho de compras e checkout direto no 'WhatsApp'.</p>
-                <a href="https://developegoncalves.github.io/divina-sensa-o/" target="_blank" class="btn-live">
-                    Ver Cardápio <i class="fas fa-external-link-alt" style="margin-left:5px;"></i>
-                </a>
+                <p>Roupas, eletrónicos ou cosméticos? Transforme o seu negócio numa loja virtual completa com carrinho e checkout no 'WhatsApp'.</p>
+                <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
     </div>
@@ -522,8 +577,8 @@
                 <i class="fas fa-quote-left"></i>
                 <p class="testi-text">"Profissional excelente. O site da barbearia ficou moderno e os agendamentos aumentaram muito."</p>
                 <div class="testi-author">
-                    <h4>Alex Victorino</h4>
-                    <span>Barbearia Victorino</span>
+                    <h4>Diego Pimenta</h4>
+                    <span>Barbearia Pimenta</span>
                 </div>
             </div>
             <div class="testi-card">
@@ -564,6 +619,25 @@
         <div class="chat-input-area" id="chatFooter">
             <input type="text" id="chatInput" class="chat-input" placeholder="Digite sua mensagem..." onkeypress="handleKeyPress(event)">
             <button class="send-btn" onclick="processUserMessage()" aria-label="Enviar Mensagem"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div id="projectModal" class="modal-overlay" onclick="closeProjectModal(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeProjectModal(event)">&times;</button>
+            <div class="modal-body">
+                <div class="modal-video-container">
+                    <iframe id="modalVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="modal-info">
+                    <h2 id="modalTitle">Título do Projeto</h2>
+                    <div class="modal-tags" id="modalTags"></div>
+                    <p id="modalDescription">Descrição detalhada do projeto.</p>
+                    <a href="#" id="modalLink" target="_blank" class="btn-main" style="width: 100%; justify-content: center; margin-top: auto;">
+                        Acessar Demo Online <i class="fas fa-external-link-alt" style="margin-left: 10px;"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -678,6 +752,138 @@
         }
 
         function handleKeyPress(e) { if (e.key === 'Enter') processUserMessage(); }
+
+        // --- LÓGICA DO MODAL DE PROJETOS ---
+        const projectsData = {
+            'cardapio': {
+                title: 'SaaS Cardápio Digital',
+                tags: ['WhatsApp', 'Delivery', 'Sem Comissões'],
+                desc: 'Plataforma completa para delivery via WhatsApp. O cliente monta o pedido e você recebe pronto, sem comissões. Ideal para pizzarias e hamburguerias.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/cardapio-digital/'
+            },
+            'acai': {
+                title: 'Açaí Victorino',
+                tags: ['Web App', 'Interativo', 'Personalizável'],
+                desc: 'Sistema interativo "Monte seu Açaí". O cliente seleciona o tamanho do copo e arrasta os ingredientes. Cálculo automático de valor.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/acai-teste/'
+            },
+            'enseada': {
+                title: 'Restaurante Enseada',
+                tags: ['Site Institucional', 'Branding', 'Cardápio'],
+                desc: 'Site institucional elegante focado em branding e apresentação do ambiente e cardápio. Design responsivo e moderno.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/enseada-mineira/'
+            },
+            'barbearia': {
+                title: 'Barbearia Victorino',
+                tags: ['Agendamento', 'Gestão', 'App'],
+                desc: 'Sistema de agendamento online completo. Permite que seus clientes marquem horário sozinhos, reduzindo faltas e organizando a agenda.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/barbearia-pimenta/'
+            },
+            'fisio': {
+                title: 'Thiago Oliveira Fisio',
+                tags: ['Landing Page', 'Google Ads', 'Conversão'],
+                desc: 'Landing Page de alta conversão otimizada para captar pacientes via tráfego pago. Carregamento rápido e botão de WhatsApp flutuante.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/Thiago-Oliveira---Fisioterapeuta/'
+            },
+            'portal': {
+                title: 'Portal IBNVJC',
+                tags: ['Gestão de Membros', 'Notícias', 'Eventos'],
+                desc: 'Portal completo para igrejas ou organizações, com gestão de eventos, notícias e área restrita para membros.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://www.ibnvjc.com.br/'
+            },
+            'mecanica': {
+                title: 'HC Mecânica',
+                tags: ['Institucional', 'Serviços', 'Orçamento'],
+                desc: 'Site institucional para oficina automotiva, detalhando serviços de lanternagem e pintura com formulário de contato.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/HC-mecanica/'
+            },
+            'pdv_premium': {
+                title: 'Sistema PDV + Cardápio Completo',
+                tags: ['Gestão Financeira', 'Ficha Técnica', 'Controle de Estoque'],
+                desc: 'Não perca dinheiro na cozinha. O nosso sistema integra Ficha Técnica e Controlo de Custos ao PDV e Cardápio Digital. Saiba exatamente o lucro por prato.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/thiago-santa-teresa/'
+            },
+            'pdv_doces': {
+                title: 'PDV Doces Artesanais',
+                tags: ['Vitrine Virtual', 'Doces', 'Encomendas'],
+                desc: 'Apresentação visual de produtos e doces artesanais, funcionando como uma vitrine digital atraente para atrair encomendas.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/Wagner-doces/'
+            },
+            'obras': {
+                title: 'Sistema de Gestão de Obras',
+                tags: ['Dashboard', 'Financeiro', 'Engenharia'],
+                desc: 'Controle total na palma da mão. Integra Controle Financeiro, Boletos e Estoque em um único Dashboard para evitar atrasos e prejuízos em obras.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/Gestao-obras-Demo/'
+            },
+            'loja_roupas': {
+                title: 'Loja de Roupas',
+                tags: ['E-commerce', 'Moda', 'Catálogo'],
+                desc: 'Loja virtual moderna para varejo de moda, com catálogo de produtos organizado e fácil navegação para o cliente.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/elinho-loja/'
+            },
+            'relogios': {
+                title: 'Gutyerre Relógios',
+                tags: ['E-commerce', 'Luxo', 'Design'],
+                desc: 'Transforme sua relojoaria em um negócio digital. Site completo, com design elegante focado em produtos de alto valor agregado.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/gutyerre-relogios/'
+            },
+            'loja_whats': {
+                title: 'Loja Virtual Integrada ao WhatsApp',
+                tags: ['WhatsApp', 'Checkout', 'Vendas'],
+                desc: 'Transforme o seu negócio numa loja virtual completa com carrinho de compras e checkout direto no WhatsApp. Ideal para qualquer nicho.',
+                video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
+                link: 'https://developegoncalves.github.io/divina-sensa-o/'
+            }
+        };
+
+        function openProject(id) {
+            const data = projectsData[id];
+            if(!data) return;
+
+            // Preenche os dados
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDescription').innerText = data.desc;
+            document.getElementById('modalLink').href = data.link;
+            document.getElementById('modalVideo').src = data.video;
+
+            // Gera as tags
+            const tagsContainer = document.getElementById('modalTags');
+            tagsContainer.innerHTML = '';
+            data.tags.forEach(tag => {
+                tagsContainer.innerHTML += `<span>${tag}</span>`;
+            });
+
+            // Abre o modal
+            const modal = document.getElementById('projectModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden'; // Trava o scroll da página principal
+        }
+
+        function closeProjectModal(e) {
+            // Fecha se clicar no X, fora da caixa (overlay) ou no botão de fechar
+            if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('close-modal') || e.target.closest('.close-modal')) {
+                const modal = document.getElementById('projectModal');
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.getElementById('modalVideo').src = ''; // Para o vídeo para economizar recursos
+                }, 300);
+                document.body.style.overflow = 'auto'; // Destrava scroll
+            }
+        }
     </script>
 </body>
 </html>
