@@ -207,6 +207,25 @@
             font-size: 0.75rem; color: white; backdrop-filter: blur(4px); border: 1px solid var(--border);
         }
 
+        /* --- LOGO NOS PROJETOS (NOVO) --- */
+        .project-logo {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            object-fit: cover;
+            z-index: 5;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .project-logo {
+            transform: scale(1.1);
+            border-color: var(--secondary);
+        }
+
         .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: white; }
         .card p { color: #a1a1aa; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1; }
@@ -348,7 +367,7 @@
 
     <header class="header">
         <nav class="nav">
-            <div class="logo" onclick="window.scrollTo(0,0)">&lt;Victorino.Dev/&gt;</div>
+            <div class="logo" onclick="window.scrollTo(0,0)">&lt;Victorino.Eng/&gt;</div>
             
             <button class="mobile-btn" onclick="toggleMenu()" aria-label="Abrir Menu">
                 <i class="fas fa-bars"></i>
@@ -400,6 +419,7 @@
         <div class="card" onclick="openProject('cardapio')">
             <div class="card-preview" style="background-image: url('img/cardapio.webp');">
                 <span class="card-tag">SaaS</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>SaaS Cardápio Digital</h3>
@@ -411,6 +431,7 @@
         <div class="card" onclick="openProject('acai')">
             <div class="card-preview" style="background-image: url('img/acai.webp');"> 
                 <span class="card-tag">Web App</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Açaí Victorino</h3>
@@ -422,6 +443,7 @@
         <div class="card" onclick="openProject('enseada')">
             <div class="card-preview" style="background-image: url('img/victorino-pao.webp');">
                 <span class="card-tag">Site</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Seu Pão Favorito</h3>
@@ -439,6 +461,7 @@
         <div class="card" onclick="openProject('barbearia')">
              <div class="card-preview" style="background-image: url('img/barbearia.webp');">
                 <span class="card-tag">Agendamento</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Barbearia Victorino</h3>
@@ -450,6 +473,7 @@
         <div class="card" onclick="openProject('fisio')">
             <div class="card-preview" style="background-image: url('img/fisio.webp');">
                 <span class="card-tag">Landing Page</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Thiago Oliveira Fisio</h3>
@@ -461,6 +485,7 @@
         <div class="card" onclick="openProject('portal')">
             <div class="card-preview" style="background-image: url('img/portal.webp');">
                 <span class="card-tag">Portal</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Portal IBNVJC</h3>
@@ -472,6 +497,7 @@
         <div class="card" onclick="openProject('mecanica')">
             <div class="card-preview" style="background-image: url('img/hc-mecanica.webp');">
                 <span class="card-tag">Serviços</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>HC Mecânica</h3>
@@ -489,6 +515,7 @@
         <div class="card" onclick="openProject('pdv_premium')" style="border-color: var(--secondary);">
             <div class="card-preview" style="background-image: url('img/pdv.webp');">
                 <span class="card-tag" style="background:var(--secondary);">Premium</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3 style="color:var(--secondary);">Sistema PDV + Carpadio Completo</h3>
@@ -502,6 +529,7 @@
         <div class="card" onclick="openProject('pdv_doces')">
             <div class="card-preview" style="background-image: url('img/wagner-doces.webp');">
                 <span class="card-tag">Vitrine</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>PDV Doces</h3>
@@ -513,6 +541,7 @@
         <div class="card" onclick="openProject('obras')">
             <div class="card-preview" style="background-image: url('img/gestao-de-obras.webp');">
                 <span class="card-tag">Vitrine</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Gestão de Obras</h3>
@@ -530,6 +559,7 @@
         <div class="card" onclick="openProject('loja_roupas')">
             <div class="card-preview" style="background-image: url('img/elinho-loja.webp');">
                 <span class="card-tag">E-commerce</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Loja de Roupas</h3>
@@ -539,7 +569,9 @@
         </div>
 
         <div class="card" onclick="openProject('relogios')">
-            <div class="card-preview" style="background-image: url('img/relogios.webp');"></div>
+            <div class="card-preview" style="background-image: url('img/relogios.webp');">
+                 <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
+            </div>
             <div class="card-content">
                 <h3>Gutyerre Relógios</h3>
                 <p>Transforme sua relojoaria em um negócio digital hoje mesmo! ⌚ Site completo, elegante e pronto para usar.</p>
@@ -550,6 +582,7 @@
         <div class="card" onclick="openProject('loja_whats')">
             <div class="card-preview" style="background-image: url('img/divina-sensacao.webp');">
                 <span class="card-tag">Loja Virtual</span>
+                <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
                 <h3>Loja Virtual Integrada ao WhatsApp</h3>
@@ -593,7 +626,7 @@
     </section>
 
     <footer>
-        <h3 class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">&lt;Victorino.Dev/&gt;</h3>
+        <h3 class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">&lt;Victorino.Eng/&gt;</h3>
         <div class="social-links">
             <a href="https://www.instagram.com/victorino.eng/" aria-label="Threads"><i class="fab fa-instagram"></i></a>
             <a href="https://br.linkedin.com/in/alexgoncalvesvictorino" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
