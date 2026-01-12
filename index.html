@@ -160,8 +160,11 @@
             background: rgba(255,255,255,0.02); border-radius: 20px; border: 1px solid var(--border);
         }
         .about-img {
-            width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px;
+            width: 100%; aspect-ratio: 1/1; 
+            object-fit: contain; /* Mostra a imagem inteira dentro do quadrado */
+            border-radius: 15px;
             border: 2px solid var(--primary);
+            background-color: #000; /* Opcional: cor de fundo para preencher o espaço vazio */
         }
         .about-content h2 { font-size: 2rem; margin-bottom: 1rem; color: white; }
         .about-content p { color: var(--text-gray); margin-bottom: 1.5rem; }
