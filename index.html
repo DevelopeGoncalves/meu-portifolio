@@ -443,7 +443,7 @@
             </div>
         </div>
         
-        <div class="card" onclick="openProject('enseada')">
+        <div class="card" onclick="openProject('Victorino-pao')">
             <div class="card-preview" style="background-image: url('img/victorino-pao.webp');">
                 <span class="card-tag">Site</span>
                 <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
@@ -473,14 +473,14 @@
             </div>
         </div>
 
-        <div class="card" onclick="openProject('fisio')">
-            <div class="card-preview" style="background-image: url('img/fisio.webp');">
-                <span class="card-tag">Landing Page</span>
+        <div class="card" onclick="openProject('hcpintura')">
+            <div class="card-preview" style="background-image: url('img/hc-pintura.webp');">
+                <span class="card-tag">Landing Page em Produção</span>
                 <img src="img/victorino.jpg" class="project-logo" alt="Victorino">
             </div>
             <div class="card-content">
-                <h3>Thiago Oliveira Fisio</h3>
-                <p>Página de alta conversão (LP) otimizada para captar pacientes via Google Ads e Instagram.</p>
+                <h3>HC Pintura</h3>
+                <p>Site Landing Page em Funilaria e Pintura Automotiva. Solução digital para oficinas de lanternagem.</p>
                 <button class="btn-live">Ver Detalhes & Vídeo <i class="fas fa-play-circle" style="margin-left:5px;"></i></button>
             </div>
         </div>
@@ -793,7 +793,7 @@
                 video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
                 link: 'https://developegoncalves.github.io/acai-teste/'
             },
-            'enseada': {
+            'Victorino-pao': {
                 title: 'Seu Pão Favorito',
                 tags: ['Site Institucional', 'Branding', 'Cardápio'],
                 desc: 'Tenha um site profissional como o das grandes franquias, mas com a alma do seu negócio artesanal. Vamos agendar uma demo?',
@@ -807,12 +807,13 @@
                 video: 'https://www.youtube.com/embed/JaW86N-VDG0?rel=0',
                 link: 'https://developegoncalves.github.io/Barbearia-Demo/'
             },
-            'fisio': {
-                title: 'Thiago Oliveira Fisio',
-                tags: ['Landing Page', 'Google Ads', 'Conversão'],
-                desc: 'Landing Page de alta conversão otimizada para captar pacientes via tráfego pago. Carregamento rápido e botão de WhatsApp flutuante.',
+            'hcpintura': {
+                title: 'HC Pintura & Lanternagem',
+                tags: ['Funilaria', 'Estética Automotiva', 'Site Institucional'],
+                desc: 'Site institucional desenvolvido para oficina de Funilaria e Pintura. Apresenta serviços de lanternagem, micro pintura, polimento e recuperação de parachoques. Focado em passar credibilidade e captar orçamentos via WhatsApp.',
                 video: 'https://www.youtube.com/embed/VIDEO_ID_AQUI',
-                link: 'https://developegoncalves.github.io/Thiago-Oliveira---Fisioterapeuta/'
+                link: 'https://hcpintura.com.br/',
+                buttonText: 'Acessar Site Oficial'
             },
             'portal': {
                 title: 'Portal IBNVJC',
@@ -869,11 +870,18 @@
             const data = projectsData[id];
             if(!data) return;
 
-            // Preenche os dados
+            // Preenche os dados básicos
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalDescription').innerText = data.desc;
-            document.getElementById('modalLink').href = data.link;
             document.getElementById('modalVideo').src = data.video;
+            
+            // --- ATUALIZA O BOTÃO DO LINK ---
+            const btnLink = document.getElementById('modalLink');
+            btnLink.href = data.link;
+
+            // Verifica se existe texto personalizado para o botão, senão usa o padrão
+            const textoBotao = data.buttonText || 'Acessar Demo Online';
+            btnLink.innerHTML = `${textoBotao} <i class="fas fa-external-link-alt" style="margin-left: 10px;"></i>`;
 
             // Gera as tags
             const tagsContainer = document.getElementById('modalTags');
